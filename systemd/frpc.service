@@ -1,0 +1,17 @@
+[Unit]
+Description=Frp Client Service (home 5555)
+Wants=network-online.target
+After=network.target
+
+[Service]
+Type=simple
+User=nobody
+Restart=on-failure
+RestartSec=5s
+ExecStart=/usr/bin/frpc -c /etc/frp/frpc.ini
+ExecReload=/usr/bin/frpc reload -c /etc/frp/frpc.ini
+StandardOutput = syslog
+StandardError = inherit
+
+[Install]
+WantedBy=multi-user.target
